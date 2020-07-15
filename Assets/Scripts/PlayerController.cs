@@ -12,7 +12,6 @@ public class PlayerController : Player
     private CharacterController _characterController;
     [SerializeField] private Interface _interface;
     [SerializeField] protected Joystick _input;
-    [HideInInspector] public float DefaulSpeed;
     [HideInInspector] public bool IsJump;
     private float nextTime = 0f;
     private float timeRate = 0.5f;
@@ -46,8 +45,8 @@ public class PlayerController : Player
             _isInFly = false;
             if (IsMobileVersion)
             {
-                xPos = _input.HorizontalPosition;
-                yPos = _input.VerticalPosition;
+                xPos = _input.InputAxis.x;
+                yPos = _input.InputAxis.y;
             }
             else
             {
@@ -60,7 +59,7 @@ public class PlayerController : Player
             _moveDirection *= MoveSpeed;
         }
 
-        if((Input.GetKeyDown(KeyCode.Space) || IsJump) && _isInFly != true)
+        if ((Input.GetKeyDown(KeyCode.Space) || IsJump) && _isInFly != true)
         {
             IsJump = false;
             _isInFly = true;
@@ -95,7 +94,7 @@ public class PlayerController : Player
         Health -= damage;
 
         if (Health <= 0)
-        {        
+        {
             PlayerDeath();
         }
     }
@@ -127,9 +126,9 @@ public class PlayerController : Player
 
     public void SpeedUp()
     {
+        MoveSpeed *= 2;
         if (Fatigue > 0)
         {
-            MoveSpeed *= 2f;
             StartDisplayTires();
         }
     }
@@ -140,15 +139,6 @@ public class PlayerController : Player
         StopDisplayTires();
         FatigueRecoveryTires();
     }
-    public IEnumerator LadderMoveUp()
-    {
-        while (true)
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * 5f);
 
-            yield return null;
-        }
-
-    }
 
 }

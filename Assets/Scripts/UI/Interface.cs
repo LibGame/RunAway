@@ -77,7 +77,7 @@ public class Interface : MonoBehaviour
         {
             if(_player.Fatigue <= 1)
             {          
-                _player.MoveSpeed = _player.DefaulSpeed;
+                //_player.MoveSpeed = _player.DefaulSpeed;
                 InvokeRecovery(2f);
                 StopTires();
             }

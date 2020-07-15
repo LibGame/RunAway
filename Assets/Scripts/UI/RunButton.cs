@@ -6,7 +6,12 @@ using UnityEngine.EventSystems;
 public class RunButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
-    public PlayerController _playerController;
+    private PlayerController _playerController;
+
+    private void Start()
+    {
+        _playerController = FindObjectOfType<PlayerController>();
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
